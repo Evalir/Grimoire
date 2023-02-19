@@ -13,11 +13,13 @@ contract Ownable is ERC173, ERC165 {
     /*//////////////////////////////////////////////////////////////
                               CONSTANTS
     //////////////////////////////////////////////////////////////*/
+
     bytes32 internal constant ERC173_OWNER_SLOT = bytes32(uint256(keccak256("erc173.owner")) - 1);
 
     /*//////////////////////////////////////////////////////////////
                                 ERRORS
     //////////////////////////////////////////////////////////////*/
+
     error NotOwner(address owner, address caller);
 
     modifier onlyOwner() virtual {
@@ -32,6 +34,7 @@ contract Ownable is ERC173, ERC165 {
     /*//////////////////////////////////////////////////////////////
                              CONSTRUCTOR
     //////////////////////////////////////////////////////////////*/
+
     constructor(address _owner) {
         SlotLib.setAddressSlot(ERC173_OWNER_SLOT, _owner);
         emit OwnershipTransferred(address(0), _owner);
@@ -40,6 +43,7 @@ contract Ownable is ERC173, ERC165 {
     /*//////////////////////////////////////////////////////////////
                             EXTERNAL LOGIC
     //////////////////////////////////////////////////////////////*/
+
     function owner() external view override returns (address) {
         return SlotLib.loadAddressSlot(ERC173_OWNER_SLOT);
     }
@@ -56,6 +60,7 @@ contract Ownable is ERC173, ERC165 {
     /*//////////////////////////////////////////////////////////////
                                 ERC165
     //////////////////////////////////////////////////////////////*/
+
     function supportsInterface(bytes4 interfaceID) external pure returns (bool) {
         return interfaceID == 0x7f5828d0;
     }
