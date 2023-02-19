@@ -17,15 +17,23 @@ contract Ownable is ERC173, ERC165 {
 
     /*//////////////////////////////////////////////////////////////
                                 ERRORS
-    //////////////////////////////////////////////////////////////*/ 
+    //////////////////////////////////////////////////////////////*/
     error NotOwner(address owner, address caller);
+
+    modifier onlyOwner() virtual {
+        // Cache the owner address in memory to save on SLOADs.
+        address _owner = SlotLib.loadAddressSlot(ERC173_OWNER_SLOT);
+        if (msg.sender != _owner)
+            revert NotOwner(_owner, msg.sender);
+        _;
+    }
 
     /*//////////////////////////////////////////////////////////////
                              CONSTRUCTOR
-    //////////////////////////////////////////////////////////////*/ 
-    constructor() {
-        SlotLib.setAddressSlot(ERC173_OWNER_SLOT, msg.sender);
-        emit OwnershipTransferred(address(0), msg.sender);
+    //////////////////////////////////////////////////////////////*/
+    constructor(address _owner) {
+        SlotLib.setAddressSlot(ERC173_OWNER_SLOT, _owner);
+        emit OwnershipTransferred(address(0), _owner);
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -46,7 +54,7 @@ contract Ownable is ERC173, ERC165 {
 
     /*//////////////////////////////////////////////////////////////
                                 ERC165
-    //////////////////////////////////////////////////////////////*/ 
+    //////////////////////////////////////////////////////////////*/
     function supportsInterface(bytes4 interfaceID) external pure returns (bool) {
         return interfaceID == 0x7f5828d0;
     }
