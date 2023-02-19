@@ -23,8 +23,9 @@ contract Ownable is ERC173, ERC165 {
     modifier onlyOwner() virtual {
         // Cache the owner address in memory to save on SLOADs.
         address _owner = SlotLib.loadAddressSlot(ERC173_OWNER_SLOT);
-        if (msg.sender != _owner)
+        if (msg.sender != _owner) {
             revert NotOwner(_owner, msg.sender);
+        }
         _;
     }
 
