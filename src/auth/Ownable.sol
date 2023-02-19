@@ -44,10 +44,13 @@ contract Ownable is ERC173, ERC165 {
                             EXTERNAL LOGIC
     //////////////////////////////////////////////////////////////*/
 
+    /// @notice Returns the owner address.
     function owner() external view override returns (address) {
         return SlotLib.loadAddressSlot(ERC173_OWNER_SLOT);
     }
 
+    /// @notice Transfers ownership of the contract to a new address.
+    /// @param _newOwner The address of the new owner of the contract.
     function transferOwnership(address _newOwner) external override {
         address _owner = SlotLib.loadAddressSlot(ERC173_OWNER_SLOT);
         if (msg.sender != _owner) {
