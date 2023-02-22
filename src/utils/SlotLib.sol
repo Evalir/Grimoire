@@ -5,11 +5,9 @@ pragma solidity ^0.8.7;
 /// @author Enrique Ortiz @Evalir
 /// @notice A library for loading and storing data in storage slots, with a certain type.
 library SlotLib {
-    /**
-     *
-     * GETTER FUNCTIONS *
-     *
-     */
+    /*//////////////////////////////////////////////////////////////
+                           GETTER FUNCTIONS
+    //////////////////////////////////////////////////////////////*/
 
     /// @notice Loads an address from a storage slot.
     /// Note that this function performs NO sanity checks, for the sake of efficiency.
@@ -38,11 +36,9 @@ library SlotLib {
         }
     }
 
-    /**
-     *
-     * SETTER FUNCTIONS *
-     *
-     */
+    /*//////////////////////////////////////////////////////////////
+                           SETTER FUNCTIONS
+    //////////////////////////////////////////////////////////////*/
 
     /// @notice Saves an address to a storage slot.
     /// Note that this function performs NO sanity checks, for the sake of efficiency.
