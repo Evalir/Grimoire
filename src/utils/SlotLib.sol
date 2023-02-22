@@ -36,6 +36,15 @@ library SlotLib {
         }
     }
 
+    /// @notice Loads an uint256 from a storage slot.
+    /// Note that this function performs NO sanity checks, for the sake of efficiency.
+    /// @param slot The storage slot to load from.
+    function loadBoolSlot(bytes32 slot) internal view returns (bool data) {
+        assembly {
+            data := sload(slot)
+        }
+    }
+
     /*//////////////////////////////////////////////////////////////
                            SETTER FUNCTIONS
     //////////////////////////////////////////////////////////////*/
@@ -63,6 +72,15 @@ library SlotLib {
     /// @param slot The storage slot to store to.
     /// @param data The data to save in the storage slot.
     function setBytes32Slot(bytes32 slot, bytes32 data) internal {
+        assembly {
+            sstore(slot, data)
+        }
+    }
+
+    /// @notice Saves a bool to a storage slot.
+    /// @param slot The storage slot to store to.
+    /// @param data The data to save in the storage slot.
+    function setBoolSlot(bytes32 slot, bool data) internal {
         assembly {
             sstore(slot, data)
         }
