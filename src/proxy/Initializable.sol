@@ -13,7 +13,7 @@ abstract contract Initializable {
     error AlreadyInitialized();
     error NotInitialized();
 
-    modifier onlyinitialized() {
+    modifier onlyInitialized() {
         if (SlotLib.loadUint256Slot(INITIALIZATION_STATUS) != 1) {
             revert NotInitialized();
         }
@@ -26,15 +26,6 @@ abstract contract Initializable {
         }
         _;
     }
-
-    /*//////////////////////////////////////////////////////////////
-                          VIRTUAL FUNCTIONS
-    //////////////////////////////////////////////////////////////*/
-
-    /// @notice Initialize function, made virtual to force
-    /// the inheriting contract to use it.
-    /// @dev you SHOULD override this.
-    function initialize() external virtual;
 
     /*//////////////////////////////////////////////////////////////
                             INTERNAL LOGIC
