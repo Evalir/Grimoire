@@ -12,16 +12,18 @@ abstract contract Initializable {
 
     error AlreadyInitialized();
     error NotInitialized();
-    
-    modifier onlyinitialized {
-        if (SlotLib.loadUint256Slot(INITIALIZATION_STATUS) != 1)
+
+    modifier onlyinitialized() {
+        if (SlotLib.loadUint256Slot(INITIALIZATION_STATUS) != 1) {
             revert NotInitialized();
+        }
         _;
     }
 
-    modifier onlyUninitialized {
-        if (SlotLib.loadUint256Slot(INITIALIZATION_STATUS) != 0)
+    modifier onlyUninitialized() {
+        if (SlotLib.loadUint256Slot(INITIALIZATION_STATUS) != 0) {
             revert AlreadyInitialized();
+        }
         _;
     }
 
